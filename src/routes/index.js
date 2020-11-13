@@ -8,7 +8,12 @@ import { fetchSpotify } from '../client';
 const Routes = () => {
   const [search, setSearch] = useState('');
   const [showResult, setShowResult] = useState([]);
+  const [music, setMusic] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [country, setCountry] = useState('CO');
   const handleInputChange = ((e, { value }) => setSearch(value));
+  const handleInputChangeCountry = ((e, { value }) => setCountry(value));
+  
 
   useEffect(() => {
     if (search) {
@@ -18,15 +23,34 @@ const Routes = () => {
           setShowResult(response.artists.items)
         })
     }
-  }, [search]);
+    if(country) {
+      const limit = 'limit=50';
+      const offset = 'offset=5'
+      fetchSpotify(`browse/new-releases?country=${country}&${limit}&${offset}`)
+      .then(response => {
+        setLoading(false);
+        setMusic(response?.albums?.items || [])      
+      })
+      .catch(error => console.error('Error:', error))
+    }
+
+    
+  }, [search, country]);
+
+//------------------------------//
+
+
+
+
+
 
   return (
     <Router>
-      <MenuBar name="search" change={handleInputChange} />
+      <MenuBar countryChange={handleInputChangeCountry} selectName='country' name="search" change={handleInputChange} />
       <Container style={{ margin: 30 }}>
         <Switch>
           <Router path="/" exact>
-            <Spotify myDimmer={search} showResult={showResult} />
+            <Spotify loading={loading} music={music} myDimmer={search} showResult={showResult} />
           </Router>
         </Switch>
       </Container>

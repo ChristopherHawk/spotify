@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Input, Modal, ModalDescription,List, Icon } from "semantic-ui-react";
+import { Button, Input, Modal,Icon } from "semantic-ui-react";
 
 const CreateToken = () => {
   const [token, setToken] = useState("");

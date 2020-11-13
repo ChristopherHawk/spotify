@@ -1,30 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Card, CardGroup, Dimmer, Message } from 'semantic-ui-react'
-import { fetchSpotify } from '../../client';
 import Profile from '../profile/index';
 import Browser from './browser';
 
-const Spotify = ({ showResult, myDimmer }) => {
-  const [music, setMusic] = useState([]);
-  const [open, setOpen] = useState({});
-  const [loading, setLoading] = useState(true);
+const Spotify = ({ showResult, myDimmer, music, loading }) => {
 
-  useEffect(() => {
-    getReleases()
+  const [open, setOpen] = useState({});  
+
+  useEffect(() => {   
     Validate(myDimmer)
   }, [myDimmer]);
-
-  const limit = 'limit=50';
-  const offset = 'offset=5'
-
-  const getReleases = async () => {
-    fetchSpotify(`browse/new-releases?country=US&${limit}&${offset}`)
-      .then(response => {
-        setLoading(false);
-        setMusic(response?.albums?.items || [])
-      })
-      .catch(error => console.error('Error:', error))
-  }
 
   const Validate = (myDimmer) => {
     if (!myDimmer || !myDimmer.trim()) return setOpen(false);
