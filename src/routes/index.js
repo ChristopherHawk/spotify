@@ -12,7 +12,7 @@ const Routes = () => {
 
   useEffect(() => {
     if (search) {
-      fetchSpotify(`search?q=${search}&type=track%2Cartist&market=BO&limit=5&offset=5`)
+      fetchSpotify(`search?q=${search}&type=track%2Cartist&market=CO&limit=14&offset=5`)
         .catch(error => console.error('Error:', error))
         .then(response => {
           setShowResult(response.artists.items)

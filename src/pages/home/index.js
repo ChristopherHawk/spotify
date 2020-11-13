@@ -14,11 +14,11 @@ const Spotify = ({ showResult, myDimmer }) => {
     Validate(myDimmer)
   }, [myDimmer]);
 
-  const limit = 'limit=8';
+  const limit = 'limit=50';
   const offset = 'offset=5'
 
   const getReleases = async () => {
-    fetchSpotify(`browse/new-releases?country=NZ&${limit}&${offset}`)
+    fetchSpotify(`browse/new-releases?country=US&${limit}&${offset}`)
       .then(response => {
         setLoading(false);
         setMusic(response?.albums?.items || [])
@@ -38,10 +38,10 @@ const Spotify = ({ showResult, myDimmer }) => {
 
   return (
     <Container >
-      <Dimmer active={open} style={{ marginTop: '80px', height: '1000px' }}>
+      <Dimmer active={open} style={{ marginTop: '85px', height: '100%' }}>
         <Browser showResult={showResult} />
       </Dimmer>
-      <CardGroup itemsPerRow={4}>
+      <CardGroup itemsPerRow={5}>
         {music.map(item =>
           <Profile
             key={item.id}

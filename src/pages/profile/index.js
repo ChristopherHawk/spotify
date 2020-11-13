@@ -41,7 +41,6 @@ const Content = ({ url, ID, albumName, albumImage, }) => {
     getAlbumTracks()
   }, []);
   const getArtists = async () => {
-    console.log("asdasdasdasd")
     fetchSpotify(`artists/${url}`)
       .catch(error => console.error('Error:', error))
       .then(response => {

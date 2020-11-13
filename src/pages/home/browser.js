@@ -3,7 +3,7 @@ import { Card, CardGroup } from 'semantic-ui-react'
 
 
 const Browser = ({ showResult }) => (
-  <CardGroup itemsPerRow={5} style={{ justifyContent: 'center', marginBottom: '150px', display: 'flex' }} >
+  <CardGroup itemsPerRow={7} style={{ justifyContent: 'center', marginBottom: '150px', display: 'flex' }} >
     {showResult.map((item, key) =>
       <Card
         key={key}
